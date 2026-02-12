@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Placar Profissional • Futebol</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <strong>Placar Pro</strong>
+      <span class="muted">Futebol</span>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn" data-route="board" id="btnBoard">PLACAR</button>
+      <button class="nav-btn" data-route="admin" id="btnAdmin">ADMIN</button>
+      <button class="nav-btn ghost" id="btnFullscreen">Tela cheia</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- BOARD -->
+    <section id="view-board" class="view">
+      <div class="board">
+        <div class="board-top">
+          <div class="timer">
+            <div class="timer-label">TEMPO</div>
+            <div class="timer-value" id="timerValue">00:00</div>
+          </div>
+
+          <div class="meta">
+            <div class="meta-item">
+              <span class="meta-label">PERÍODO</span>
+              <span class="meta-value" id="periodValue">1º</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">STATUS</span>
+              <span class="meta-pill" id="statusValue">PARADO</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="teams">
+          <div class="team" id="teamA">
+            <div class="team-head">
+              <div class="badge" id="badgeA">A</div>
+              <div class="team-name" id="nameA">TIME A</div>
+            </div>
+            <div class="score" id="scoreA">0</div>
+          </div>
+
+          <div class="divider">
+            <div class="vs">VS</div>
+          </div>
+
+          <div class="team" id="teamB">
+            <div class="team-head">
+              <div class="badge" id="badgeB">B</div>
+              <div class="team-name" id="nameB">TIME B</div>
+            </div>
+            <div class="score" id="scoreB">0</div>
+          </div>
+        </div>
+
+        <div class="board-bottom">
+          <div class="hint">
+            Dica: no **ADMIN**, você altera nomes, placar e tempo. O sistema salva automaticamente.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="view-admin" class="view">
+      <div class="admin">
+        <div class="admin-head">
+          <h1>Dashboard Admin</h1>
+          <p class="muted">Controle de times, placar e cronômetro.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Times</h2>
+
+            <div class="field">
+              <label>Nome do Time A</label>
+              <input id="inputNameA" type="text" placeholder="Ex: Flamengo" />
+            </div>
+
+            <div class="field">
+              <label>Nome do Time B</label>
+              <input id="inputNameB" type="text" placeholder="Ex: Palmeiras" />
+            </div>
+
+            <div class="row">
+              <button class="btn" id="btnSwap">Alternar lados</button>
+              <button class="btn ghost" id="btnResetNames">Reset nomes</button>
+            </div>
+
+            <div class="divider-line"></div>
+
+            <h3>Período</h3>
+            <div class="row">
+              <button class="btn ghost" data-period="1º">1º</button>
+              <button class="btn ghost" data-period="2º">2º</button>
+              <button class="btn ghost" data-period="INT">INT</button>
+              <button class="btn ghost" data-period="PR">PR</button>
+              <button class="btn ghost" data-period="PEN">PEN</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Placar</h2>
+
+            <div class="score-controls">
+              <div class="score-box">
+                <div class="score-title" id="adminLabelA">TIME A</div>
+                <div class="score-big" id="adminScoreA">0</div>
+                <div class="row">
+                  <button class="btn" data-score="A" data-delta="-1">-1</button>
+                  <button class="btn" data-score="A" data-delta="1">+1</button>
+                  <button class="btn ghost" data-score="A" data-delta="3">+3</button>
+                </div>
+              </div>
+
+              <div class="score-box">
+                <div class="score-title" id="adminLabelB">TIME B</div>
+                <div class="score-big" id="adminScoreB">0</div>
+                <div class="row">
+                  <button class="btn" data-score="B" data-delta="-1">-1</button>
+                  <button class="btn" data-score="B" data-delta="1">+1</button>
+                  <button class="btn ghost" data-score="B" data-delta="3">+3</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <button class="btn danger" id="btnResetScore">Zerar placar</button>
+              <button class="btn ghost" id="btnResetAll">Reset geral</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Cronômetro</h2>
+
+            <div class="field">
+              <label>Ajustar tempo (mm:ss)</label>
+              <div class="row">
+                <input id="inputMinutes" type="number" min="0" max="199" placeholder="mm" />
+                <span class="colon">:</span>
+                <input id="inputSeconds" type="number" min="0" max="59" placeholder="ss" />
+                <button class="btn" id="btnSetTime">Aplicar</button>
+              </div>
+            </div>
+
+            <div class="timer-admin">
+              <div class="timer-admin-value" id="adminTimerValue">00:00</div>
+              <div class="row">
+                <button class="btn" id="btnStartPause">Iniciar</button>
+                <button class="btn ghost" id="btnStop">Parar</button>
+                <button class="btn ghost" id="btnZero">Zerar</button>
+              </div>
+            </div>
+
+            <div class="divider-line"></div>
+
+            <div class="row">
+              <button class="btn ghost" id="btnAddMin">+1 min</button>
+              <button class="btn ghost" id="btnSubMin">-1 min</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Atalhos</h2>
+            <ul class="list">
+              <li><strong>F</strong> = tela cheia</li>
+              <li><strong>Space</strong> = iniciar/pausar</li>
+              <li><strong>R</strong> = zerar tempo</li>
+              <li><strong>1</strong> = +1 Time A</li>
+              <li><strong>2</strong> = +1 Time B</li>
+            </ul>
+
+            <div class="divider-line"></div>
+            <p class="muted small">
+              Obs: atalhos funcionam melhor na tela Admin.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="muted">Placar Pro • HTML/CSS/JS • LocalStorage</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
